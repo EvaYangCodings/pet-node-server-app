@@ -33,14 +33,13 @@ function UsersController(app) {
         const user = req.body;
         const foundUser = users.find(
             user =>
-                user.firstName === req.body.firstName &&
-                user.lastName === req.body.lastName &&
-                user.password === req.body.password);
+                user.email === req.body.email &&
+                user.password === parseInt(req.body.password));
         if (foundUser) {
             currentUser = foundUser;
             res.send(foundUser);
         } else {
-            res.sendStatus(404).json({ message: 'User not found.' });
+            res.status(404).json({ message: 'User not found.' });
         }
     };
 
@@ -77,10 +76,10 @@ function UsersController(app) {
     app.delete("/api/users/:id", deleteUser);
     app.put("/api/users/:id", updateUser);
     app.post("/api/users", createUser);
-    app.post("/api/signin", signin);
-    app.post("/api/signup", signup);
-    app.get("/api/signout", signout);
-        // app.get("/api/profile", profile);
+    app.post("/api/users/signin", signin);
+    app.post("/api/users/signup", signup);
+    app.get("/api/users/signout", signout);
+    // app.get("/api/profile", profile);
 }
 
 export default UsersController;
