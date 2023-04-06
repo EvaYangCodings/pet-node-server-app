@@ -1,0 +1,24 @@
+{
+  "type": "module",
+  "name": "pet-node-server-app",
+  "version": "1.0.0",
+  "description": "a server for a dog-related social media application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvaYangCodings/pet-node-server-app.git"
+  },
+  "author": "pet project group",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EvaYangCodings/pet-node-server-app/issues"
+  },
+  "homepage": "https://github.com/EvaYangCodings/pet-node-server-app#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
