@@ -1,13 +1,12 @@
 import users from "./users.js";
-
 let currentUser = null;
 
 function UsersController(app) {
-    const findAllUsers = (req, res) => {
+    const getUsers = (req, res) => {
         res.send(users);
     };
 
-    const findUserById = (req, res) => {
+    const getUserById = (req, res) => {
         const user = users.find(user => user.id == parseInt(req.params.id));
         res.send(user);
     };
@@ -45,7 +44,7 @@ function UsersController(app) {
         }
     };
 
-    const logout = (req, res) => {
+    const signout = (req, res) => {
         currentUser = null;
         res.sendStatus(204);
     };
@@ -73,15 +72,15 @@ function UsersController(app) {
         }
     };
 
+    app.get("/api/users", getUsers);
+    app.get("/api/users/:id", getUserById);
+    app.delete("/api/users/:id", deleteUser);
+    app.put("/api/users/:id", updateUser);
+    app.post("/api/users", createUser);
+    app.post("/api/signin", signin);
+    app.post("/api/signup", signup);
+    app.get("/api/signout", signout);
+        // app.get("/api/profile", profile);
 }
-app.get("/api/users", findAllUsers);
-app.get("/api/users/:id", findUserById);
-app.delete("/api/users/:id", deleteUser);
-app.put("/api/users/:id", updateUser);
-app.post("/api/users", createUser);
-app.post("/api/signin", signin);
-app.post("/api/signup", signup);
-app.get("/api/logout", logout);
-    // app.get("/api/profile", profile);
 
 export default UsersController;
