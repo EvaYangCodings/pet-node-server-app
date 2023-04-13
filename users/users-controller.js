@@ -66,6 +66,7 @@ function UsersController(app) {
 
     const signup = async (req, res) => {
         const user = req.body;
+
         const foundUser = await usersDao.findUserByEmail(
          req.body.email);
         if (foundUser) {
