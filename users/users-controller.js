@@ -33,30 +33,34 @@ function UsersController(app) {
     };
 
     const signin = async (req, res) => {
-        const user = req.body;
+        // const user = req.body;
         const foundUser = await usersDao.findUserByCredentials(
             req.body.email,
             req.body.password
         );
 
         if (foundUser) {
-            currentUser = foundUser;
-            res.send(foundUser);
+            req.session["currentUser"] = foundUser;
+            // currentUser = foundUser;
+            // res.send(foundUser);
+            res.json(foundUser);
         } else {
             res.status(404).json({ message: 'User not found.' });
         }
     };
 
     const signout = async (req, res) => {
-        currentUser = null;
+        req.session.destroy();
         res.sendStatus(204);
     };
 
     // const profile = (req, res) => {
+    //     const currentUser = req.session["currentUser"];
     //     if (currentUser) {
-    //         res.send(currentUser);
+    //         res.json(currentUser);
     //     } else {
     //         res.sendStatus(404);
+    //         return;
     //     }
     // };
 
@@ -68,7 +72,8 @@ function UsersController(app) {
             res.status(409).json({ message: 'Email has already been registered.' });
         } else {
             const newUser = await usersDao.createUser(user);
-            currentUser = newUser;
+            req.session["currentUser"] = newUser;
+            // currentUser = newUser;
             res.json(newUser);
         }
     };
@@ -81,7 +86,7 @@ function UsersController(app) {
     app.post("/api/users/signin", signin);
     app.post("/api/users/signup", signup);
     app.get("/api/users/signout", signout);
-    // app.get("/api/profile", profile);
+    // app.get("/api/users/profile", profile);
 }
 
 export default UsersController;

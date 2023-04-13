@@ -5,10 +5,24 @@ import DetailsController from "./details/details-controller.js";
 import LikesController from "./likes/likes-controller.js";
 import mongoose from "mongoose";
 import PostsController from "./posts/posts-controller.js";
+import session from "express-session";
 mongoose.connect('mongodb+srv://dogLand:dogLand@cluster1.8uzug5v.mongodb.net/dogLand?retryWrites=true&w=majority');
 
 const app = express()
-app.use(cors());
+
+app.use(
+    session({
+        secret: "any string",
+        resave: false,
+        saveUninitialized: true,
+    })
+);
+app.use(
+    cors({
+        credentials: true,
+        origin: "http://localhost:3000",
+    })
+);
 
 app.use(express.json())
 UsersController(app)
