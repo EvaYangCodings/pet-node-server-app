@@ -1,7 +1,7 @@
 // import users from "./users.js";
 import * as usersDao from "./users-dao.js";
 
-let currentUser = null;
+// let currentUser = null;
 
 function UsersController(app) {
     const findAllUsers = async (req, res) => {
@@ -85,7 +85,7 @@ function UsersController(app) {
     app.post("/api/users", createUser);
     app.post("/api/users/signin", signin);
     app.post("/api/users/signup", signup);
-    app.get("/api/users/signout", signout);
+    app.post("/api/users/signout", signout);
     // app.get("/api/users/profile", profile);
 }
 
