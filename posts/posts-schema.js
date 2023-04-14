@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
-const schema = mongoose.Schema({
+const postsSchema = mongoose.Schema({
+    userId: String,
     username: String,
     handle: String,
     avatar: String,
@@ -14,4 +15,4 @@ const schema = mongoose.Schema({
     collects: Number,
     collected: Boolean
 }, {collection: 'posts'});
-export default schema;
+export default postsSchema;
