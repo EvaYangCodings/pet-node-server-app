@@ -5,7 +5,7 @@ const DislikesController = (app) => {
     const userDislikesDetail = async(req, res) => {
         const userId = req.params.uid;
         const detailId = req.params.did;
-        const foundDislikes = await likesDao.findDislikedOrNotByUser(userId, detailId);
+        const foundDislikes = await dislikesDao.findDislikedOrNotByUser(userId, detailId);
         console.log("foundDislikes is:", foundDislikes);
         // console.log("detailId got in likes-controller:", detailId);
         if (foundDislikes.length > 0) {
