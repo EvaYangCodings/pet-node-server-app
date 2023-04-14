@@ -14,6 +14,8 @@ const usersSchema = new mongoose.Schema({
     },
     avatar: {type: String},
     bio: {type: String},
+    birthdate: {type: String},
+    joinedDate: {type: String},
     location: {type: String},
     followers: [{type: mongoose.Schema.Types.ObjectId, ref: 'users'}],
     following: [{type: mongoose.Schema.Types.ObjectId, ref: 'users'}],

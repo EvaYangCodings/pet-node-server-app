@@ -54,15 +54,15 @@ function UsersController(app) {
         res.sendStatus(204);
     };
 
-    // const profile = (req, res) => {
-    //     const currentUser = req.session["currentUser"];
-    //     if (currentUser) {
-    //         res.json(currentUser);
-    //     } else {
-    //         res.sendStatus(404);
-    //         return;
-    //     }
-    // };
+    const profile = (req, res) => {
+        const currentUser = req.session["currentUser"];
+        if (currentUser) {
+            res.json(currentUser);
+        } else {
+            res.sendStatus(404);
+            return;
+        }
+    };
 
     const signup = async (req, res) => {
         const user = req.body;
@@ -87,7 +87,7 @@ function UsersController(app) {
     app.post("/api/users/signin", signin);
     app.post("/api/users/signup", signup);
     app.post("/api/users/signout", signout);
-    // app.get("/api/users/profile", profile);
+    app.get("/api/users/profile", profile);
 }
 
 export default UsersController;
