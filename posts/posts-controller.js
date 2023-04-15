@@ -12,8 +12,6 @@ const PostsController = (app) => {
         newPost.collected = false;
         const insertedPost = await postsDao.createPost(newPost);
         res.json(insertedPost);
-        console.log("--------6--------")
-        console.log(newPost.userId);
     }
 
     const findPosts = async (req, res) => {
@@ -33,15 +31,20 @@ const PostsController = (app) => {
         const status = await postsDao.updatePost(postIdToUpdate, updates);
         res.json(status);
     }
+
     const deletePost = async (req, res) => {
         const postIdToDelete = req.params.pid;
         const status = await postsDao.deletePost(postIdToDelete);
-        res.json(status);
+        if (status) {
+            res.status(200).json({ message: `Post with ID ${postIdToDelete} has been deleted.` });
+        } else {
+            res.status(400).json({ error: `Failed to delete post with ID ${postIdToDelete}.` });
+        }
     }
 
     app.post('/api/posts', createPost);
     app.get('/api/posts', findPosts);
-    app.get('/api/posts/:uid', findPostsByUser);
+    app.get('/api/posts/:userId', findPostsByUser);
     app.put('/api/posts/:pid', updatePost);
     app.delete('/api/posts/:pid', deletePost);
 }
