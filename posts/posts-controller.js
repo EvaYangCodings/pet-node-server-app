@@ -10,18 +10,13 @@ const PostsController = (app) => {
         newPost.reposts = 0;
         newPost.collects = 0;
         newPost.collected = false;
+        newPost.comments = [];
         const insertedPost = await postsDao.createPost(newPost);
         res.json(insertedPost);
     }
 
     const findPosts = async (req, res) => {
         const posts = await postsDao.findPosts()
-        res.json(posts);
-    }
-
-    const findPostsByUser = async (req, res) => {
-        const userId = req.params.userId;
-        const posts = await postsDao.findPostsByUser(userId)
         res.json(posts);
     }
 
@@ -42,11 +37,48 @@ const PostsController = (app) => {
         }
     }
 
+    const findPostsByUser = async (req, res) => {
+        const userId = req.params.userId;
+        const posts = await postsDao.findPostsByUser(userId)
+        res.json(posts);
+    }
+
+    const findPostById = async (req, res) => {
+        const pid = req.params.pid;
+        const post = await postsDao.findPostById(pid);
+        res.json(post);
+    }
+
+    const addComment = async (req, res) => {
+        const pid = req.params.pid;
+        console.log("-----req");
+        console.log(req.body);
+        const newComment = req.body.comment;
+        try {
+            await postsDao.addComment(pid, newComment);
+            res.json({ message: 'Comment added successfully' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Server error' });
+        }
+    };
+
+    const getComments = async (req, res) => {
+        const pid = req.params.pid;
+        const post = await postsDao.getComments(pid);
+        res.json(post.comments);
+    };
+
+
     app.post('/api/posts', createPost);
     app.get('/api/posts', findPosts);
-    app.get('/api/posts/:userId', findPostsByUser);
+    app.get('/api/posts/user/:userId', findPostsByUser);
     app.put('/api/posts/:pid', updatePost);
     app.delete('/api/posts/:pid', deletePost);
+
+    app.get('/api/posts/id/:pid', findPostById);
+    app.post('/api/posts/id/:pid/comments', addComment);
+    app.get('/api/posts/id/:pid/comments', getComments);
 }
 
 export default PostsController;

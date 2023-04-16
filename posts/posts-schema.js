@@ -13,6 +13,12 @@ const postsSchema = mongoose.Schema({
     replies: Number,
     reposts: Number,
     collects: Number,
-    collected: Boolean
+    collected: Boolean,
+    comments: [{
+        text: String,
+        userId: String,
+        userName: String,
+        time: String
+    }]
 }, {collection: 'posts'});
 export default postsSchema;
