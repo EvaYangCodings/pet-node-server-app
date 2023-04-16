@@ -13,3 +13,8 @@ export const findLikesByUserId = async (userId) => {
 export const findLikedOrNotByUser = async (userId, detailId) => {
     return likesModel.find({userId: userId, detailId: detailId});
 }
+
+export const userRevertLikesDetail = async (userId, detailId) => {
+    return likesModel.deleteOne({userId, detailId});
+}
+
