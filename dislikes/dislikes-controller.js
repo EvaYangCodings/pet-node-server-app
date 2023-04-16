@@ -7,9 +7,8 @@ const DislikesController = (app) => {
         const detailId = req.params.did;
         const foundDislikes = await dislikesDao.findDislikedOrNotByUser(userId, detailId);
         console.log("foundDislikes is:", foundDislikes);
-        // console.log("detailId got in likes-controller:", detailId);
         if (foundDislikes.length > 0) {
-            console.log("already liked");
+            console.log("already disliked");
         } else {
             const disLike = await dislikesDao.userDislikesDetail(userId, detailId);
             res.json(disLike)

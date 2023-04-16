@@ -7,6 +7,7 @@ import LikesController from "./likes/likes-controller.js";
 import mongoose from "mongoose";
 import PostsController from "./posts/posts-controller.js";
 import session from "express-session";
+import DislikesController from "./dislikes/dislikes-controller.js";
 mongoose.connect('mongodb+srv://dogLand:dogLand@cluster1.8uzug5v.mongodb.net/dogLand?retryWrites=true&w=majority');
 
 const app = express()
@@ -27,6 +28,7 @@ app.use(express.json())
 UsersController(app)
 DetailsController(app)
 LikesController(app)
+DislikesController(app)
 PostsController(app)
 EventController(app)
 
