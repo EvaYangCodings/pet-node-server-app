@@ -14,13 +14,13 @@ app.use(
     session({
         secret: "any string",
         resave: false,
-        saveUninitialized: true,
+        cookie: { secure: false },//locally should be faulse, should be true on aws, heroku or render
     })
 );
 app.use(
     cors({
         credentials: true,
-        origin: "http://localhost:3000",
+        origin: "http://localhost:3000", //this applies to local development, for aws or render js, here should be where the react app is hosted, such as netlify.
     })
 );
 app.use(express.json())
