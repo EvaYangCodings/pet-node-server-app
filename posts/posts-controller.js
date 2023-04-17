@@ -11,6 +11,7 @@ const PostsController = (app) => {
         newPost.collects = 0;
         newPost.collected = false;
         newPost.comments = [];
+
         const insertedPost = await postsDao.createPost(newPost);
         res.json(insertedPost);
     }
@@ -51,8 +52,6 @@ const PostsController = (app) => {
 
     const addComment = async (req, res) => {
         const pid = req.params.pid;
-        console.log("-----req");
-        console.log(req.body);
         const newComment = req.body.comment;
         try {
             await postsDao.addComment(pid, newComment);
@@ -66,6 +65,12 @@ const PostsController = (app) => {
     const getComments = async (req, res) => {
         const pid = req.params.pid;
         const post = await postsDao.getComments(pid);
+        if (!post) {
+            return res.status(404).json({message: 'Post not found'});
+        }
+        if (!post.comments) {
+            post.comments = [];
+        }
         res.json(post.comments);
     };
 

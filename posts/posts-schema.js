@@ -8,6 +8,7 @@ const postsSchema = mongoose.Schema({
     time: String,
     image: String,
     post: String,
+    // location: String,
     likes: Number,
     liked: Boolean,
     replies: Number,
