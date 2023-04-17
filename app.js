@@ -15,6 +15,7 @@ app.use(
     session({
         secret: "any string",
         resave: false,
+        saveUninitialized: true, // Add this line
         cookie: { secure: false },//locally should be faulse, should be true on aws, heroku or render
     })
 );
