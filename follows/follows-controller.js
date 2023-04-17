@@ -34,8 +34,8 @@ const FollowsController = (app) => {
 
     app.post("/api/users/:follower/follows/:followed", userFollowsUser)
     app.delete("/api/users/:follower/follows/:followed", unfollowUser)
-    app.get("/api/followed/users/:followed/follows", findFollowsByFollowedId)
-    app.get("/api/follower/users/:follower/follows", findFollowsByFollowerId)
+    app.get("/api/users/followed/users/:followed/follows", findFollowsByFollowedId)
+    app.get("/api/users/follower/users/:follower/follows", findFollowsByFollowerId)
 }
 
 export default FollowsController;
