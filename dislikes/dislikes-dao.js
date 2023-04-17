@@ -13,3 +13,7 @@ export const findDislikesByUserId = async (userId) => {
 export const findDislikedOrNotByUser = async (userId, detailId) => {
     return dislikesModel.find({userId: userId, detailId: detailId});
 }
+
+export const userRevertDislikesDetail = async (userId, detailId) => {
+    return dislikesModel.deleteOne({userId: userId, detailId: detailId});
+}
