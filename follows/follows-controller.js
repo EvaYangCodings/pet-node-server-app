@@ -19,7 +19,7 @@ const FollowsController = (app) => {
     const checkFollowedOrNot = async (req, res) => {
         const follower = req.params.follower;
         const followed = req.params.followed;
-        let follow = await followsDao.findFollowsByFollowerAndFollowed(follower, followed)
+        const follow = await followsDao.findFollowsByFollowerAndFollowed(follower, followed)
         res.json(follow)
     }
 
