@@ -1,10 +1,11 @@
 import mongoose from 'mongoose'; 
 
-const schema = mongoose.Schema({
+const eventSchema = mongoose.Schema({
     username: String,
     title: String,
+    time: String,
     image: String,
-    tuit: String,
+    event: String,
 }, {collection: 'events'}
 );
-export default schema;
+export default eventSchema;
