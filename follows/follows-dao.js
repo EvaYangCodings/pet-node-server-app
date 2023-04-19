@@ -13,10 +13,10 @@ export const findFollowsByFollowerAndFollowed = async (follower, followed) => {
 }
 
 export const findFollowsByFollowerId = async (follower) => {
-    return followsModel.find({follower});
+    return followsModel.find({follower}).populate("followed").exec();
 }
 
 export const findFollowsByFollowedId = async (followed) => {
-    return followsModel.find({followed});
+    return followsModel.find({followed}).populate("follower").exec();
 }
 
