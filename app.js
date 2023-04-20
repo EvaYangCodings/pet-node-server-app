@@ -1,7 +1,7 @@
 import express from "express"
 import cors from "cors"
 import UsersController from "./users/users-controller.js";
-import EventController from "./events/tuits-controller.js";
+import EventController from "./events/events-controller.js";
 import DetailsController from "./details/details-controller.js";
 import LikesController from "./likes/likes-controller.js";
 import mongoose from "mongoose";
@@ -34,5 +34,6 @@ DislikesController(app)
 PostsController(app)
 EventController(app)
 FollowsController(app)
+
 
 app.listen(process.env.PORT || 4000);
