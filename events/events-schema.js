@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'; 
 
 const eventSchema = mongoose.Schema({
+    userId: String,
     username: String,
     title: String,
     time: String,
