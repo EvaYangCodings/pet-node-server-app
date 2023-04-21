@@ -5,7 +5,6 @@ const DislikesController = (app) => {
         const userId = req.params.uid;
         const detailId = req.params.did;
         const foundDislikes = await dislikesDao.findDislikedOrNotByUser(userId, detailId);
-        console.log("foundDislikes is:", foundDislikes);
         if (foundDislikes.length > 0) {
             console.log("already disliked");
         } else {
@@ -30,7 +29,6 @@ const DislikesController = (app) => {
         const userId = req.params.uid;
         const detailId = req.params.did;
         const foundDislikes = await dislikesDao.findDislikedOrNotByUser(userId, detailId);
-        console.log("foundDislikes is:", foundDislikes);
         if (foundDislikes.length > 0) {
             console.log("found disliked");
             const disLike = await dislikesDao.userRevertDislikesDetail(userId, detailId);

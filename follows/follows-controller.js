@@ -5,14 +5,13 @@ const FollowsController = (app) => {
     const userFollowsUser = async (req, res) => {
         const follower = req.params.follower;
         const followed = req.params.followed;
-        // Comment out this check, as we already checked in front end, only when not followed, we will call this
-        // let follow = await followsDao.findFollowsByFollowerAndFollowed(follower, followed)
-        // if (follow) {
-        //     res.sendStatus(400);
-        //     console.log("already followed this user!");
-        //     return;
-        // }
-        const follow = await followsDao.userFollowsUser(follower, followed);
+        let follow = await followsDao.findFollowsByFollowerAndFollowed(follower, followed);
+        if (follow) {
+            res.sendStatus(400);
+            console.log("already followed this user!");
+            return;
+        }
+        follow = await followsDao.userFollowsUser(follower, followed);
         res.json(follow);
     }
 

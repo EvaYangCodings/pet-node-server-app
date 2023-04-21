@@ -2,12 +2,9 @@ import * as likesDao from "./likes-dao.js";
 import {findLikedOrNotByUser} from "./likes-dao.js";
 const LikesController = (app) => {
     const userLikesDetail = async(req, res) => {
-        console.log("userLikesDetail got called");
         const userId = req.params.uid;
         const detailId = req.params.did;
         const foundLikes = await likesDao.findLikedOrNotByUser(userId, detailId);
-        console.log("foundLikes is:", foundLikes);
-        // console.log("detailId got in likes-controller:", detailId);
         if (foundLikes.length > 0) {
             console.log("already liked");
         } else {
@@ -32,7 +29,6 @@ const LikesController = (app) => {
         const userId = req.params.uid;
         const detailId = req.params.did;
         const foundLikes = await likesDao.findLikedOrNotByUser(userId, detailId);
-        console.log("foundLikes is:", foundLikes);
         if (foundLikes.length > 0) {
             console.log("found liked");
             const likes = await likesDao.userRevertLikesDetail(userId, detailId);
