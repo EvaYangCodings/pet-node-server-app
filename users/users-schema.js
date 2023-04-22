@@ -13,12 +13,11 @@ const usersSchema = new mongoose.Schema({
         enum: ["Personal User", "Service Provider", "Admin"]
     },
     avatar: {type: String},
+    banner: {type: String},
     bio: {type: String},
     birthdate: {type: String},
     joinedDate: {type: String},
     location: {type: String},
-    followers: [{type: mongoose.Schema.Types.ObjectId, ref: 'users'}],
-    following: [{type: mongoose.Schema.Types.ObjectId, ref: 'users'}],
 }, {collection: 'users'});
 
 usersSchema.pre("save", function (next) {
