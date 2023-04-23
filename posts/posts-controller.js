@@ -1,15 +1,10 @@
 import * as postsDao from './posts-dao.js'
 
 const PostsController = (app) => {
-
     const createPost = async (req, res) => {
         const newPost = req.body;
         newPost.likes = 0;
         newPost.liked = false;
-        newPost.replies = 0;
-        newPost.reposts = 0;
-        newPost.collects = 0;
-        newPost.collected = false;
         newPost.comments = [];
 
         const insertedPost = await postsDao.createPost(newPost);
@@ -32,9 +27,9 @@ const PostsController = (app) => {
         const postIdToDelete = req.params.pid;
         const status = await postsDao.deletePost(postIdToDelete);
         if (status) {
-            res.status(200).json({ message: `Post with ID ${postIdToDelete} has been deleted.` });
+            res.status(200).json({message: `Post with ID ${postIdToDelete} has been deleted.`});
         } else {
-            res.status(400).json({ error: `Failed to delete post with ID ${postIdToDelete}.` });
+            res.status(400).json({error: `Failed to delete post with ID ${postIdToDelete}.`});
         }
     }
 
@@ -55,10 +50,10 @@ const PostsController = (app) => {
         const newComment = req.body.comment;
         try {
             await postsDao.addComment(pid, newComment);
-            res.json({ message: 'Comment added successfully' });
+            res.json({message: 'Comment added successfully'});
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Server error' });
+            res.status(500).json({message: 'Server error'});
         }
     };
 
@@ -74,13 +69,11 @@ const PostsController = (app) => {
         res.json(post.comments);
     };
 
-
     app.post('/api/posts', createPost);
     app.get('/api/posts', findPosts);
     app.get('/api/posts/user/:userId', findPostsByUser);
     app.put('/api/posts/:pid', updatePost);
     app.delete('/api/posts/:pid', deletePost);
-
     app.get('/api/posts/id/:pid', findPostById);
     app.post('/api/posts/id/:pid/comments', addComment);
     app.get('/api/posts/id/:pid/comments', getComments);
