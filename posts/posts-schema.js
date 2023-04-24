@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const postsSchema = mongoose.Schema({
     userId: String,
+    userName: String,
     time: String,
     image: String,
     post: String,
